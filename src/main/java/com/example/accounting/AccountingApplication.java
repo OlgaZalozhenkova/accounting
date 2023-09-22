@@ -13,9 +13,4 @@ public class AccountingApplication {
         SpringApplication.run(AccountingApplication.class, args);
     }
 
-//    @Bean
-//    GoodsObject goodsObject() {
-//        return new GoodsObject();
-//    }
-
 }

@@ -15,6 +15,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -53,29 +56,27 @@ public class GoodsController {
         );
     }
 
-//    пробный метод
-    @GetMapping("/goods/query/{id}")
-
-    public Good getGoodByIdQuery(@PathVariable("id") int id) {
-
-        return goodsService.getGoodByIdQuery(id).orElseThrow(
-                () -> new GoodNotFoundException()
-        );
+    @GetMapping("/supplier/goods/{id}")
+    public List<Good> findSupplierGoods(@PathVariable("id") int id) {
+         return goodsService.findSupplierGoods(id);
     }
 
-//    @GetMapping("/supplier/goods/{id}")
-//    public List<Good> findSupplierGoods(@PathVariable("id") int id) {
-//         return goodsService.findSupplierGoods(id);
+////    пробный метод
+//    @GetMapping("/good/query/{id}")
+//    public Good getGoodByIdQuery(@PathVariable("id") int id) {
+//        return goodsService.getGoodByIdQuery(id);
 //    }
 
-    @GetMapping("/supplier/goods")
-    public List<Good> findSupplierGoods() {
-        return goodsService.findSupplierGoods();
-    }
+//    //    пробный метод
+//    @GetMapping("/good/query")
+//    public Good getGoodByIdQuery() {
+//        return goodsService.getGoodByIdQuery();
+//    }
 
-    @GetMapping("findId/{id}")
-    public String findId(@PathVariable("id") int id) {
-
+//    вернуть обратно
+    @GetMapping("findId/{id}/{id1}")
+    public String findId(@PathVariable("id") int id,@PathVariable("id1") int id1) {
+        System.out.println(id1);
         Good good = goodsService.getGoodsById(id).orElse(null);
         if (good != null) {
 
@@ -181,4 +182,10 @@ public class GoodsController {
     public GoodsObject makePurchase(@RequestBody GoodsObject goodsObject) {
         return new GoodsObject(goodsService.makePurchase(goodsObject));
     }
+
+////    пробный метод
+//    @GetMapping("/period")
+//    public List<Good> getGoodsByPeriod(@RequestParam("dateFrom") Date dateFrom) {
+//        return goodsService.findAll();
+//    }
 }

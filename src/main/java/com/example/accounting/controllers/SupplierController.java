@@ -3,6 +3,7 @@ package com.example.accounting.controllers;
 import com.example.accounting.models.Good;
 import com.example.accounting.models.Supplier;
 import com.example.accounting.services.SupplierService;
+import com.example.accounting.util.GoodNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +37,13 @@ public class SupplierController {
     }
 
     @GetMapping("/{name}")
-    public String getName(@PathVariable("name") String name){
+    public String getName(@PathVariable("name") String name) {
         return supplierService.getName(name);
     }
 
+    //    пробный метод
+    @GetMapping("/goods/query/{id}")
+    public Supplier getSupplierByIdQuery(@PathVariable("id") int id) {
+        return supplierService.getSupplierByIdQuery(id);
+    }
 }

@@ -1,10 +1,12 @@
 package com.example.accounting.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,6 +23,7 @@ public class Supplier {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "suppliers", fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @ManyToMany(mappedBy = "suppliers")
     private List<Good> goods;
 }

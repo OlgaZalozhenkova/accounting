@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -49,6 +50,11 @@ public class SupplierService {
         if (suppler != null) {
             return suppler.getName();
         } else throw new SupplierNotFoundException();
+    }
+
+    //    пробный метод
+    public Supplier getSupplierByIdQuery(int id) {
+        return supplierRepository.getSupplierByIdQuery(id);
     }
 }
 

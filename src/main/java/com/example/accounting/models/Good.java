@@ -1,5 +1,6 @@
 package com.example.accounting.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,7 +8,11 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -45,8 +50,29 @@ public class Good {
     private String category;
 
     @ManyToMany
-    @JoinTable(name ="goods_suppliers",
-            joinColumns = @JoinColumn(name ="goods_id"),
-    inverseJoinColumns = @JoinColumn(name="suppliers_id"))
+    @JsonBackReference
+    @JoinTable(name = "goods_suppliers",
+            joinColumns = @JoinColumn(name = "goods_id"),
+            inverseJoinColumns = @JoinColumn(name = "suppliers_id"))
     private List<Supplier> suppliers;
+
+    @ManyToMany
+    @JsonBackReference
+    @JoinTable(name = "goods_operations",
+            joinColumns = @JoinColumn(name = "goods_id"),
+            inverseJoinColumns = @JoinColumn(name = "operations_id"))
+    private List<Operation> operations;
+
+
+
+//    @Column(name = "date_of_supply")
+//    @Temporal(TemporalType.TIMESTAMP)
+////    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+//    @DateTimeFormat(pattern = "dd/MM/yyyy")
+//    private Date dateOfSupply;
+//
+//    @Column(name = "date_of_selling")
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @DateTimeFormat(pattern = "dd/MM/yyyy")
+//    private Date dateOfSelling;
 }
